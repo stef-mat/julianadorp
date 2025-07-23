@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ArrowRight } from 'lucide-react';
 import PageHeader from '../components/PageHeader';
 import SearchAndFilter from '../components/SearchAndFilter';
@@ -24,7 +24,7 @@ const LocationsPage = ({ setPageState, initialFilters }) => {
     const handleCategoryChange = (category) => {
         setActiveView('all');
         if (category === 'Alle') {
-            setSelectedCategories([...new Set(locaties.map(loc => loc.categorie))]);
+            setSelectedCategories(uniqueCategories);
         } else {
             setSelectedCategories([category]);
         }
@@ -32,7 +32,14 @@ const LocationsPage = ({ setPageState, initialFilters }) => {
 
     const handleShowFavorites = () => setActiveView('favorites');
 
-    const allCategories = ['Alle', ...new Set(locaties.map(loc => loc.categorie))];
+    const uniqueCategories = useMemo(() => {
+        if (initialFilters && initialFilters.length > 0) {
+            return [...new Set(initialFilters)];
+        }
+        return [...new Set(locaties.map(loc => loc.categorie))];
+    }, [initialFilters]);
+
+    const allCategories = ['Alle', ...uniqueCategories];
 
     return (
         <div className="min-h-screen bg-amber-100/50">
