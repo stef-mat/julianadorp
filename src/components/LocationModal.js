@@ -2,7 +2,7 @@ import React from 'react';
 import { MapPin, Clock, Globe, Euro, Heart, X } from 'lucide-react';
 import { getCategoryStyle, getGoogleMapsUrl } from '../data/utils';
 
-const LocationModal = ({ location, isFavorite, onClose, onToggleFavorite }) => {
+const LocationModal = ({ location, isFavorite, onClose, onToggleFavorite, onHideLocation }) => {
     // Render niets als er geen locatie is geselecteerd
     if (!location) return null;
 
@@ -68,12 +68,18 @@ const LocationModal = ({ location, isFavorite, onClose, onToggleFavorite }) => {
                     
                     {/* Knoppen voor acties */}
                     <div className="flex flex-wrap gap-3 pt-4 border-t border-amber-200">
-                         <button 
-                            onClick={() => onToggleFavorite(location.naam)} 
+                        <button
+                            onClick={() => onToggleFavorite(location.naam)}
                             className={`flex items-center gap-2 px-4 py-2 rounded-full font-semibold transition-colors ${ isFavorite ? 'bg-rose-500 text-white' : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-rose-50' }`}
-                         >
+                        >
                             <Heart className={`w-5 h-5 ${isFavorite ? 'fill-current' : ''}`} />
                             {isFavorite ? 'Opgeslagen!' : 'Opslaan'}
+                        </button>
+                        <button
+                            onClick={() => { onHideLocation(location.naam); onClose(); }}
+                            className="px-4 py-2 rounded-full font-semibold bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 transition-colors"
+                        >
+                            Verberg
                         </button>
                         <a 
                             href={getGoogleMapsUrl(location.gps_coordinaten, location.naam)} 
