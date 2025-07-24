@@ -77,8 +77,6 @@ const LocationsPage = ({ setPageState, initialFilters }) => {
                         <LocationCard
                             key={location.naam}
                             location={location}
-                            isFavorite={favorites.has(location.naam)}
-                            onToggleFavorite={toggleFavorite}
                             onShowDetails={setSelectedLocation}
                         />
                     ))}
@@ -107,10 +105,7 @@ const LocationsPage = ({ setPageState, initialFilters }) => {
 
             <LocationModal
                 location={selectedLocation}
-                isFavorite={selectedLocation ? favorites.has(selectedLocation.naam) : false}
                 onClose={() => setSelectedLocation(null)}
-                onToggleFavorite={toggleFavorite}
-                onHideLocation={hideLocation}
             />
         </div>
     );
