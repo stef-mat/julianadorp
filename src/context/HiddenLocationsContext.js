@@ -37,3 +37,6 @@ export const HiddenLocationsProvider = ({ children }) => {
 export const useHiddenLocations = () => {
     return useContext(HiddenLocationsContext);
 };
+
+export { HiddenLocationsContext };
+
