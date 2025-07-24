@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import LandingPage from './pages/LandingPage';
 import LocationsPage from './pages/LocationsPage';
+import { FavoritesProvider } from './context/FavoritesContext';
+import { HiddenLocationsProvider } from './context/HiddenLocationsContext';
 
 const App = () => {
     const [pageState, setPageState] = useState({ page: 'landing', filters: [] });
@@ -26,10 +28,14 @@ const App = () => {
     );
 
     return (
-        <main style={{ fontFamily: "'Nunito', sans-serif" }}>
-            <GlobalStyles />
-            {renderPage()}
-        </main>
+        <FavoritesProvider>
+            <HiddenLocationsProvider>
+                <main style={{ fontFamily: "'Nunito', sans-serif" }}>
+                    <GlobalStyles />
+                    {renderPage()}
+                </main>
+            </HiddenLocationsProvider>
+        </FavoritesProvider>
     );
 };
 
