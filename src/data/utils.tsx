@@ -1,5 +1,5 @@
 // Hier komen alle hulpfuncties die componenten nodig hebben.
-export const getCategoryStyle = (category) => {
+export const getCategoryStyle = (category: string) => {
     const styles = {
         'Bezienswaardigheden': 'bg-sky-100 text-sky-800 border-sky-200',
         'Attracties': 'bg-emerald-100 text-emerald-800 border-emerald-200',
@@ -13,7 +13,7 @@ export const getCategoryStyle = (category) => {
     return styles[category] || 'bg-slate-100 text-slate-800 border-slate-200';
 };
 
-export const getGoogleMapsUrl = (gps_coordinaten, naam) => {
+export const getGoogleMapsUrl = (gps_coordinaten: string, naam: string) => {
     if (gps_coordinaten && gps_coordinaten !== "Niet expliciet vermeld") {
         const coords = gps_coordinaten.replace(/[°NSEO\s]/g, '');
         return `https://www.google.com/maps/search/?api=1&query=${coords}`;

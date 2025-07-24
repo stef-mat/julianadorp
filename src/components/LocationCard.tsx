@@ -1,8 +1,9 @@
 import React from 'react';
 import { Euro, Heart } from 'lucide-react';
 import { getCategoryStyle } from '../data/utils';
+import { LocationCardProps } from '../types';
 
-const LocationCard = ({ location, isFavorite, onToggleFavorite, onShowDetails }) => (
+const LocationCard = ({ location, isFavorite, onToggleFavorite, onShowDetails }: LocationCardProps) => (
     <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 group flex flex-col">
         <div className="relative">
             <div onClick={() => onShowDetails(location)} className="cursor-pointer">

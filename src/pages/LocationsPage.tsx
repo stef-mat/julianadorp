@@ -8,12 +8,13 @@ import { useFavorites } from '../hooks/useFavorites';
 import { useFilteredLocations } from '../hooks/useFilteredLocations';
 import { useHiddenLocations } from '../hooks/useHiddenLocations';
 import { locaties } from '../data/index';
+import { Location, LocationsPageProps } from '../types';
 
-const LocationsPage = ({ setPageState, initialFilters }) => {
+const LocationsPage = ({ setPageState, initialFilters }: LocationsPageProps) => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [selectedCategories, setSelectedCategories] = useState(initialFilters || []);
-    const [selectedLocation, setSelectedLocation] = useState(null);
-    const [activeView, setActiveView] = useState('all');
+    const [selectedCategories, setSelectedCategories] = useState<string[]>(initialFilters || []);
+    const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+    const [activeView, setActiveView] = useState<'all' | 'favorites'>('all');
 
     const { favorites, favoriteLocations, toggleFavorite } = useFavorites();
     const { hidden, hideLocation, restoreLocation } = useHiddenLocations();
@@ -28,7 +29,7 @@ const LocationsPage = ({ setPageState, initialFilters }) => {
         ? locationsFiltered
         : favoritesFiltered;
 
-    const handleCategoryChange = (category) => {
+    const handleCategoryChange = (category: string) => {
         setActiveView('all');
         if (category === 'Alle') {
             setSelectedCategories([...new Set(locaties.map(loc => loc.categorie))]);

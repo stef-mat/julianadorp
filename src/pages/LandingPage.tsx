@@ -2,8 +2,9 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { doenData } from '../data/doen';
 import { etenData } from '../data/eten';
+import { LandingPageProps } from '../types';
 
-const LandingPage = ({ setPageState }) => {
+const LandingPage = ({ setPageState }: LandingPageProps) => {
 
     const handleDoenClick = () => {
         const doenCategories = [...new Set(doenData.map(item => item.categorie))];

@@ -1,6 +1,7 @@
 import React from 'react';
+import { PageHeaderProps } from '../types';
 
-const PageHeader = ({ title, subtitle, children }) => (
+const PageHeader = ({ title, subtitle, children }: PageHeaderProps) => (
     <div className="text-center mb-12">
         <h1 className="text-5xl font-bold text-amber-900 mb-2" style={{ fontFamily: "'Comic Sans MS', 'cursive', 'sans-serif'" }}>
             {title}
