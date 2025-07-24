@@ -2,13 +2,18 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import LocationsPage from './LocationsPage';
 import { locaties } from '../data';
+import { FavoritesProvider } from '../hooks/useFavorites';
 
 beforeEach(() => {
     window.localStorage.clear();
 });
 
 test('hidden locations are removed and can be restored', async () => {
-    render(<LocationsPage setPageState={() => {}} initialFilters={[]} />);
+    render(
+        <FavoritesProvider>
+            <LocationsPage setPageState={() => {}} initialFilters={[]} />
+        </FavoritesProvider>
+    );
     const name = locaties[0].naam;
 
     // Card should be visible initially
