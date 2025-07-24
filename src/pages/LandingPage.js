@@ -1,25 +1,12 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { doenData } from '../data/doen';
 import { etenData } from '../data/eten';
 
-const LandingPage = ({ setPageState }) => {
-
-    const handleDoenClick = () => {
-        const doenCategories = [...new Set(doenData.map(item => item.categorie))];
-        setPageState({
-            page: 'locations',
-            filters: doenCategories
-        });
-    };
-
-    const handleEtenClick = () => {
-        const etenCategories = [...new Set(etenData.map(item => item.categorie))];
-        setPageState({
-            page: 'locations',
-            filters: etenCategories
-        });
-    };
+const LandingPage = () => {
+    const doenCategories = [...new Set(doenData.map(item => item.categorie))];
+    const etenCategories = [...new Set(etenData.map(item => item.categorie))];
 
     return (
         <div className="min-h-screen bg-amber-50">
@@ -35,8 +22,9 @@ const LandingPage = ({ setPageState }) => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div 
-                        onClick={handleDoenClick}
+                    <Link
+                        to="/locations"
+                        state={{ filters: doenCategories }}
                         className="group bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                     >
                         <div className="text-4xl mb-3">🎡</div>
@@ -50,10 +38,11 @@ const LandingPage = ({ setPageState }) => {
                             <span>Verken activiteiten</span>
                             <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
                         </div>
-                    </div>
+                    </Link>
 
-                    <div 
-                        onClick={handleEtenClick}
+                    <Link
+                        to="/locations"
+                        state={{ filters: etenCategories }}
                         className="group bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                     >
                         <div className="text-4xl mb-3">🍔</div>
@@ -67,7 +56,7 @@ const LandingPage = ({ setPageState }) => {
                             <span>Ontdek de smaken</span>
                             <ArrowRight className="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" />
                         </div>
-                    </div>
+                    </Link>
 
                     <div className="group bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 cursor-not-allowed opacity-70">
                         <div className="text-4xl mb-3">☀️</div>
