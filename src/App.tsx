@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import LandingPage from './pages/LandingPage';
 import LocationsPage from './pages/LocationsPage';
+import { PageState } from './types';
 
 const App = () => {
-    const [pageState, setPageState] = useState({ page: 'landing', filters: [] });
+    const [pageState, setPageState] = useState<PageState>({ page: 'landing', filters: [] });
 
     const renderPage = () => {
         switch (pageState.page) {

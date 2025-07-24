@@ -15,8 +15,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "build": "tsc && react-scripts build",
+    "test": "tsc --noEmit && react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -40,6 +40,10 @@
   "devDependencies": {
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.31",
-    "tailwindcss": "^3.3.0"
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.2.2",
+    "@types/react": "^18.2.46",
+    "@types/react-dom": "^18.2.17",
+    "@types/jest": "^29.5.11"
   }
 }

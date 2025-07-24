@@ -1,8 +1,9 @@
 import React from 'react';
 import { MapPin, Clock, Globe, Euro, Heart, X } from 'lucide-react';
 import { getCategoryStyle, getGoogleMapsUrl } from '../data/utils';
+import { LocationModalProps } from '../types';
 
-const LocationModal = ({ location, isFavorite, onClose, onToggleFavorite, onHideLocation }) => {
+const LocationModal = ({ location, isFavorite, onClose, onToggleFavorite, onHideLocation }: LocationModalProps) => {
     // Render niets als er geen locatie is geselecteerd
     if (!location) return null;
 

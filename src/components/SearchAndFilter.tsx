@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, Heart } from 'lucide-react';
+import { SearchAndFilterProps } from '../types';
 
 const SearchAndFilter = ({
     searchTerm,
@@ -12,7 +13,7 @@ const SearchAndFilter = ({
     hasHidden,
     activeView,
     favoritesCount
-}) => (
+}: SearchAndFilterProps) => (
     <div className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl shadow-lg border border-slate-200 sticky top-4 z-20">
         <div className="relative mb-4">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 w-5 h-5" />
