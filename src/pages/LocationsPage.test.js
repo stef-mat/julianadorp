@@ -2,13 +2,18 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import LocationsPage from './LocationsPage';
 import { locaties } from '../data';
+import { MemoryRouter } from 'react-router-dom';
 
 beforeEach(() => {
     window.localStorage.clear();
 });
 
 test('hidden locations are removed and can be restored', async () => {
-    render(<LocationsPage setPageState={() => {}} initialFilters={[]} />);
+    render(
+        <MemoryRouter>
+            <LocationsPage initialFilters={[]} />
+        </MemoryRouter>
+    );
     const name = locaties[0].naam;
 
     // Card should be visible initially
@@ -24,3 +29,4 @@ test('hidden locations are removed and can be restored', async () => {
     userEvent.click(screen.getByText('Verborgen herstellen'));
     expect(await screen.findByText(name)).toBeInTheDocument();
 });
+

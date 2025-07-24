@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader';
 import SearchAndFilter from '../components/SearchAndFilter';
 import LocationCard from '../components/LocationCard';
@@ -9,7 +10,7 @@ import { useFilteredLocations } from '../hooks/useFilteredLocations';
 import { useHiddenLocations } from '../hooks/useHiddenLocations';
 import { locaties } from '../data/index';
 
-const LocationsPage = ({ setPageState, initialFilters }) => {
+const LocationsPage = ({ initialFilters }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategories, setSelectedCategories] = useState(initialFilters || []);
     const [selectedLocation, setSelectedLocation] = useState(null);
@@ -48,10 +49,10 @@ const LocationsPage = ({ setPageState, initialFilters }) => {
     return (
         <div className="min-h-screen bg-amber-100/50">
              <div className="fixed top-4 left-4 z-30">
-                <button onClick={() => setPageState({ page: 'landing' })} className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm text-slate-700 rounded-full shadow-lg hover:bg-white transition-colors">
+                <Link to="/" className="flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm text-slate-700 rounded-full shadow-lg hover:bg-white transition-colors">
                     <ArrowRight className="w-4 h-4 transform rotate-180" />
                     <span>Home</span>
-                </button>
+                </Link>
             </div>
             <div className="container mx-auto p-4 md:p-8">
                 <PageHeader

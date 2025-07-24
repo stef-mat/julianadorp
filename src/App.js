@@ -1,20 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
 import LocationsPage from './pages/LocationsPage';
 
-const App = () => {
-    const [pageState, setPageState] = useState({ page: 'landing', filters: [] });
+const LocationsWrapper = () => {
+    const location = useLocation();
+    const filters = location.state?.filters || [];
+    return <LocationsPage initialFilters={filters} />;
+};
 
-    const renderPage = () => {
-        switch (pageState.page) {
-            case 'landing': 
-                return <LandingPage setPageState={setPageState} />;
-            case 'locations': 
-                return <LocationsPage setPageState={setPageState} initialFilters={pageState.filters} />;
-            default: 
-                return <LandingPage setPageState={setPageState} />;
-        }
-    };
+const App = () => {
 
     const GlobalStyles = () => (
         <style jsx global>{`
@@ -26,10 +21,16 @@ const App = () => {
     );
 
     return (
-        <main style={{ fontFamily: "'Nunito', sans-serif" }}>
-            <GlobalStyles />
-            {renderPage()}
-        </main>
+        <BrowserRouter>
+            <main style={{ fontFamily: "'Nunito', sans-serif" }}>
+                <GlobalStyles />
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/locations" element={<LocationsWrapper />} />
+                    <Route path="*" element={<LandingPage />} />
+                </Routes>
+            </main>
+        </BrowserRouter>
     );
 };
 
