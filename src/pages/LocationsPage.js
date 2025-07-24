@@ -6,6 +6,7 @@ import LocationCard from '../components/LocationCard';
 import LocationModal from '../components/LocationModal';
 import { useFavorites } from '../hooks/useFavorites';
 import { useFilteredLocations } from '../hooks/useFilteredLocations';
+import { useHiddenLocations } from '../hooks/useHiddenLocations';
 import { locaties } from '../data/index';
 
 const LocationsPage = ({ setPageState, initialFilters }) => {
@@ -15,11 +16,17 @@ const LocationsPage = ({ setPageState, initialFilters }) => {
     const [activeView, setActiveView] = useState('all');
 
     const { favorites, favoriteLocations, toggleFavorite } = useFavorites();
+    const { hidden, hideLocation, restoreLocation } = useHiddenLocations();
     const filteredByGroup = useFilteredLocations(searchTerm, selectedCategories);
 
-    const locationsToShow = activeView === 'all' 
-        ? filteredByGroup 
-        : favoriteLocations.filter(loc => loc.naam.toLowerCase().includes(searchTerm.toLowerCase()));
+    const locationsFiltered = filteredByGroup.filter(loc => !hidden.has(loc.naam));
+    const favoritesFiltered = favoriteLocations
+        .filter(loc => loc.naam.toLowerCase().includes(searchTerm.toLowerCase()))
+        .filter(loc => !hidden.has(loc.naam));
+
+    const locationsToShow = activeView === 'all'
+        ? locationsFiltered
+        : favoritesFiltered;
 
     const handleCategoryChange = (category) => {
         setActiveView('all');
@@ -31,6 +38,10 @@ const LocationsPage = ({ setPageState, initialFilters }) => {
     };
 
     const handleShowFavorites = () => setActiveView('favorites');
+
+    const handleRestoreHidden = () => {
+        hidden.forEach(name => restoreLocation(name));
+    };
 
     const allCategories = ['Alle', ...new Set(locaties.map(loc => loc.categorie))];
 
@@ -54,6 +65,8 @@ const LocationsPage = ({ setPageState, initialFilters }) => {
                         selectedCategory={selectedCategories.length === 1 ? selectedCategories[0] : ''}
                         onCategoryChange={handleCategoryChange}
                         onShowFavorites={handleShowFavorites}
+                        onRestoreHidden={handleRestoreHidden}
+                        hasHidden={hidden.size > 0}
                         activeView={activeView}
                         favoritesCount={favorites.size}
                     />
@@ -97,6 +110,7 @@ const LocationsPage = ({ setPageState, initialFilters }) => {
                 isFavorite={selectedLocation ? favorites.has(selectedLocation.naam) : false}
                 onClose={() => setSelectedLocation(null)}
                 onToggleFavorite={toggleFavorite}
+                onHideLocation={hideLocation}
             />
         </div>
     );

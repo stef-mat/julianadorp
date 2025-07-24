@@ -1,15 +1,17 @@
 import React from 'react';
 import { Search, Heart } from 'lucide-react';
 
-const SearchAndFilter = ({ 
-    searchTerm, 
-    onSearchChange, 
-    categories, 
-    selectedCategory, 
+const SearchAndFilter = ({
+    searchTerm,
+    onSearchChange,
+    categories,
+    selectedCategory,
     onCategoryChange,
-    onShowFavorites, 
-    activeView, 
-    favoritesCount 
+    onShowFavorites,
+    onRestoreHidden,
+    hasHidden,
+    activeView,
+    favoritesCount
 }) => (
     <div className="bg-white/80 backdrop-blur-sm p-4 rounded-2xl shadow-lg border border-slate-200 sticky top-4 z-20">
         <div className="relative mb-4">
@@ -37,10 +39,10 @@ const SearchAndFilter = ({
                 </button>
             ))}
             <div className="w-px h-6 bg-slate-200 mx-2"></div>
-            <button 
-                onClick={onShowFavorites} 
+            <button
+                onClick={onShowFavorites}
                 className={`flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-semibold transition-all duration-200 border-2 ${
-                    activeView === 'favorites' 
+                    activeView === 'favorites'
                     ? 'bg-rose-500 text-white border-rose-500 shadow-md'
                     : 'bg-white text-rose-500 hover:bg-rose-50 hover:border-rose-300 border-rose-200'
                 }`}
@@ -49,6 +51,14 @@ const SearchAndFilter = ({
                 <span>Mijn Favorieten</span>
                 <span className="bg-rose-100 text-rose-600 text-xs font-bold rounded-full px-2 py-0.5">{favoritesCount}</span>
             </button>
+            {hasHidden && (
+                <button
+                    onClick={onRestoreHidden}
+                    className="px-4 py-1.5 rounded-full text-sm font-semibold bg-white text-slate-700 border-2 border-slate-200 hover:bg-slate-50 transition-colors"
+                >
+                    Verborgen herstellen
+                </button>
+            )}
         </div>
     </div>
 );
