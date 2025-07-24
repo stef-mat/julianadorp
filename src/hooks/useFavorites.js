@@ -17,7 +17,9 @@ export const useFavorites = () => {
 
     const toggleFavorite = (locationName) => {
         const newFavorites = new Set(favorites);
-        newFavorites.has(locationName) ? newFavorites.delete(locationName) : newFavorites.add(locationName);
+        newFavorites.has(locationName)
+            ? newFavorites.delete(locationName)
+            : newFavorites.add(locationName);
         setFavorites(newFavorites);
     };
 
