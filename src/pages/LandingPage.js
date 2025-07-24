@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { doenData } from '../data/doen';
-import { etenData } from '../data/eten';
+import doenData from '../data/doen.json';
+import etenData from '../data/eten.json';
 
 const LandingPage = ({ setPageState }) => {
 
